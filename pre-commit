@@ -1,30 +1,43 @@
 #!/bin/bash
 
-function shellCheck()
+runValue=0
+function verifyShellScripts()
  {
-         fileType=$1
-         file=$2
-         if [ "$fileType" == ".sh" ] ; then
-                  op=$(shellcheck $file)
-                  res=$?
-                  if [ "$res" -ne "0" ] ; then
-                           echo "$file: failed check"
-                           echo "$op"
-                           isAllFine=1
-                   fi;
-           fi;
-	return $isAllFine
+         file=$1
+         op=$(shellcheck $file)
+         res=$?
+         if [ "$res" -ne "0" ] ; then
+        	 echo "$file: failed check"
+         	 echo "$op"
+                 runValue=1
+         fi;
+	return $runValue
  }
 
-for i in `git diff --cached --name-only --diff-filter=ACM`; do
-	isAllFine=0
-	input=${i:(-3)}
-	shellCheck $input $i
+function verifyPythonScripts()
+{
+	file=$1 
+	check=$(pylint $file)
+	result=$?
+	if [ "$result" -ne "0" ] ; then 
+		echo "$file: failed check"
+		echo "$check"
+		runValue=1
+	fi;
+	return $runValue 
+}
 
+for i in `git diff --cached --name-only --diff-filter=ACM`; do
+	input=${i:(-3)}
+	if [ "$input" == ".sh" ] ; then 
+		verifyShellScripts $i
+	elif [ "$input" == ".py" ] ; then
+		verifyPythonScripts $i
+	fi;
 done
 
-if [ "$isAllFine" -eq "1" ] ; then
+if [ "$runValue" -eq "1" ] ; then
 	 exit 1
- else
+else
 	 exit 0
- fi;
+fi;
