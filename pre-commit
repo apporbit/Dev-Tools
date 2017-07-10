@@ -1,29 +1,30 @@
 #!/bin/bash
 
 runValue=0
-function verifyShellScripts()
- {
-         file=$1
-         op=$(shellcheck $file)
-         res=$?
-         if [ "$res" -ne "0" ] ; then
-        	 echo "$file: failed check"
-         	 echo "$op"
-                 runValue=1
-         fi;
-	return $runValue
- }
 
-function verifyPythonScripts()
+function implementChecks()
 {
-	file=$1 
-	check=$(pylint $file)
 	result=$?
 	if [ "$result" -ne "0" ] ; then 
 		echo "$file: failed check"
 		echo "$check"
 		runValue=1
 	fi;
+}
+
+function verifyShellScripts()
+{
+         file=$1
+         check=$(shellcheck $file)
+	implementChecks 
+	return $runValue
+}
+
+function verifyPythonScripts()
+{
+	file=$1 
+	check=$(pylint $file)
+	implementChecks
 	return $runValue 
 }
 
