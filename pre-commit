@@ -1,10 +1,10 @@
 #!/bin/bash
 
 runValue=0
-
+check=0
 function implementChecks()
 {
-	result=$?
+	result=$1
 	if [ "$result" -ne "0" ] ; then 
 		echo "$file: failed check"
 		echo "$check"
@@ -14,17 +14,17 @@ function implementChecks()
 
 function verifyShellScripts()
 {
-         file=$1
-         check=$(shellcheck $file)
-	implementChecks 
+  file=$1
+  check=$(shellcheck $file)
+	implementChecks $? 
 	return $runValue
 }
 
 function verifyPythonScripts()
 {
-	file=$1 
-	check=$(pylint $file)
-	implementChecks
+  file=$1 
+  check=$(pylint $file)
+	implementChecks $?
 	return $runValue 
 }
 
@@ -38,6 +38,7 @@ for i in `git diff --cached --name-only --diff-filter=ACM`; do
 done
 
 if [ "$runValue" -eq "1" ] ; then
+	echo "Commit Failed"
 	 exit 1
 else
 	 exit 0
