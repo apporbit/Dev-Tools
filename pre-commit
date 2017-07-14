@@ -1,7 +1,7 @@
 #!/bin/bash
 
 runValue=0
-check=0
+check="message"
 function implementChecks()
 {
 	result=$1
@@ -15,25 +15,25 @@ function implementChecks()
 function verifyShellScripts()
 {
   file=$1
-  check=$(shellcheck $file)
-	implementChecks $? 
+  check=$(shellcheck "$file")
+	implementChecks "$?" 
 	return $runValue
 }
 
 function verifyPythonScripts()
 {
   file=$1 
-  check=$(pylint $file)
-	implementChecks $?
+  check=$(pylint "$file")
+	implementChecks "$?"
 	return $runValue 
 }
 
-for i in `git diff --cached --name-only --diff-filter=ACM`; do
+for i in $(git diff --cached --name-only --diff-filter=ACM); do
 	input=${i:(-3)}
 	if [ "$input" == ".sh" ] ; then 
-		verifyShellScripts $i
+		verifyShellScripts "$i"
 	elif [ "$input" == ".py" ] ; then
-		verifyPythonScripts $i
+		verifyPythonScripts "$i"
 	fi;
 done
 
