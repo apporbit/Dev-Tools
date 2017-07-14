@@ -14,17 +14,17 @@ function implementChecks()
 
 function verifyShellScripts()
 {
-  file=$1
-  check=$(shellcheck "$file")
-	implementChecks "$?" 
+	file=$1
+  	check=$(shellcheck "$file")
+		implementChecks "$?" 
 	return $runValue
 }
 
 function verifyPythonScripts()
 {
-  file=$1 
-  check=$(pylint "$file")
-	implementChecks "$?"
+	file=$1 
+	check=$(pylint "$file")
+		implementChecks "$?"
 	return $runValue 
 }
 
