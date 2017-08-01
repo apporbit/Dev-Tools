@@ -28,12 +28,20 @@ function verifyPythonScripts()
 	return $runValue 
 }
 
+function verifyGoScripts()
+{
+	file=$1
+	go fmt $file
+}
+
 for i in $(git diff --cached --name-only --diff-filter=ACM); do
 	input=${i:(-3)}
 	if [ "$input" == ".sh" ] ; then 
 		verifyShellScripts "$i"
 	elif [ "$input" == ".py" ] ; then
 		verifyPythonScripts "$i"
+	elif [ "$input" == ".go" ] ; then 
+		verifyGoScripts "$i" 
 	fi;
 done
 
