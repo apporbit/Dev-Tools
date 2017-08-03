@@ -2,6 +2,15 @@
 
 runValue=0
 check="message"
+
+function exists()
+{
+	if [ command -v "$1" >/dev/null 2>&1 ]; then
+		echo "$1 is not found. Please install to continue"
+		exit 1
+	fi;
+}
+
 function implementChecks()
 {
 	result=$1
@@ -31,16 +40,19 @@ function verifyPythonScripts()
 function verifyGoScripts()
 {
 	file=$1
-	go fmt $file
+	goimports -w  $file
 }
 
 for i in $(git diff --cached --name-only --diff-filter=ACM); do
 	input=${i:(-3)}
 	if [ "$input" == ".sh" ] ; then 
+		exists "$shellcheck"
 		verifyShellScripts "$i"
 	elif [ "$input" == ".py" ] ; then
+		exists "$pylint"
 		verifyPythonScripts "$i"
-	elif [ "$input" == ".go" ] ; then 
+	elif [ "$input" == ".go" ] ; then
+		exists "$goimports" 
 		verifyGoScripts "$i" 
 	fi;
 done
