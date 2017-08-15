@@ -7,7 +7,7 @@ function exists()
 {
 	if [ command -v "$1" >/dev/null 2>&1 ]; then
 		echo "$1 is not found. Please install to continue"
-		exit 1
+		exit 1 
 	fi;
 }
 
