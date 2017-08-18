@@ -40,7 +40,7 @@ function verifyPythonScripts()
 function verifyGoScripts()
 {
 	file=$1
-	goimports -w  $file
+	goimports -w $file
 }
 
 for i in $(git diff --cached --name-only --diff-filter=ACM); do
