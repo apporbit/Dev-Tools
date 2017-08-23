@@ -1,12 +1,12 @@
 #!/bin/bash
-
 runValue=0
 check="message"
 
 function exists()
 {
-	if [ command -v "$1" >/dev/null 2>&1 ]; then
-		echo "$1 is not found. Please install to continue"
+	program=$1
+	if [ hash "$program" >/dev/null 2>&1 ]; then
+		echo >&2 "$program is not found. Please install to continue"
 		exit 1 
 	fi;
 }
@@ -23,6 +23,7 @@ function implementChecks()
 
 function verifyShellScripts()
 {
+	exists "shellcheck"
 	file=$1
   	check=$(shellcheck "$file")
 		implementChecks "$?" 
@@ -31,6 +32,7 @@ function verifyShellScripts()
 
 function verifyPythonScripts()
 {
+	exists "pylint"
 	file=$1 
 	check=$(pylint "$file")
 		implementChecks "$?"
@@ -39,6 +41,7 @@ function verifyPythonScripts()
 
 function verifyGoScripts()
 {
+	exists "goimports" 
 	file=$1
 	goimports -w $file
 }
@@ -46,13 +49,10 @@ function verifyGoScripts()
 for i in $(git diff --cached --name-only --diff-filter=ACM); do
 	input=${i:(-3)}
 	if [ "$input" == ".sh" ] ; then 
-		exists "$shellcheck"
 		verifyShellScripts "$i"
 	elif [ "$input" == ".py" ] ; then
-		exists "$pylint"
 		verifyPythonScripts "$i"
 	elif [ "$input" == ".go" ] ; then
-		exists "$goimports" 
 		verifyGoScripts "$i" 
 	fi;
 done
