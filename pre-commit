@@ -2,6 +2,7 @@
 runValue=0
 check="message"
 
+# This function's main purpose is to search for a file or program and pr# int an error message if it is not found. The function takes in a file # or program as the parameter.
 function exists()
 {
 	program=$1
@@ -11,34 +12,39 @@ function exists()
 	fi;
 }
 
+# This function receives the output number from the debugger implemented# and depending on whether it is 0 or not, it prints out the errors that# the debugger found in the committed code and sets the runValue to 1
 function implementChecks()
 {
-	result=$1
+	result=$1 
+	errorMsg=$2
 	if [ "$result" -ne "0" ] ; then 
 		echo "$file: failed check"
-		echo "$check"
+		echo "$errorMsg"
 		runValue=1
 	fi;
 }
 
+# This function goes thrugh any shellscript file that has been committed# and uses the shellcheck debugger to find errors. It then prints out th# e errors found in the committed code and sets the runValue to 1
 function verifyShellScripts()
 {
 	exists "shellcheck"
 	file=$1
   	check=$(shellcheck "$file")
-		implementChecks "$?" 
+		implementChecks "$?" "$check" 
 	return $runValue
 }
 
+# This function runs through any python file that has been committed and# uses the pylint debugger to find errors. Then, the errors are printed # and the runValue is set to 1
 function verifyPythonScripts()
 {
 	exists "pylint"
 	file=$1 
 	check=$(pylint "$file")
-		implementChecks "$?"
+		implementChecks "$?" "$check"
 	return $runValue 
 }
 
+# This function acts the same way as the two functions in the sense that# it uses goimports to debug through a go program and fix whatever synta# x issues present. The difference is goimports will automatically corre# ct the errors found, thus committing code instantly.
 function verifyGoScripts()
 {
 	exists "goimports" 
@@ -46,6 +52,7 @@ function verifyGoScripts()
 	goimports -w $file
 }
 
+# The for loop runs every file that is attempting to be committed on git# through their respective functions,dependent on the type of file it is
 for i in $(git diff --cached --name-only --diff-filter=ACM); do
 	input=${i:(-3)}
 	if [ "$input" == ".sh" ] ; then 
@@ -57,6 +64,7 @@ for i in $(git diff --cached --name-only --diff-filter=ACM); do
 	fi;
 done
 
+# At the end, if the runValue is equal to 1, then an error message, "Com# mit Failed", not committing the code to the repository
 if [ "$runValue" -eq "1" ] ; then
 	echo "Commit Failed"
 	 exit 1
