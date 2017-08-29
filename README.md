@@ -37,3 +37,9 @@ The GoImports debugger goes through the developers code and corrects any syntax 
 
 After the debuggers go through the developer scripts and there seems to be no errors outputted from the debuggers, the developer scripts will be committed to the git repository and will be ready to be pushed to the repository. 
 
+Behind the Scenes:
+
+The script written for the commit testing is activated through the pre-commit hook, one of the committing-workflow hooks involved with git. Basically, the pre-commit hook is run first before the commit message is typed, using it to inspect the files that are about to be committed in order to make sure the developer did not forget anything. 
+
+The script was written within the pre-commit hook itself so that it could be implemented during the git commit process. I called the debuggers within the script itself and created a loop to loop through the committed files.
+ 
