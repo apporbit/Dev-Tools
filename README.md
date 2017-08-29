@@ -17,6 +17,7 @@ Ultimately, the goal of this implementation is to reduce reviewing time on githu
 #### File Types:
  
 This script will only work for the following files attempting to be committed:
+
 	shellscript - .sh
 	python - .py
 	golang - .go
