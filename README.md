@@ -43,7 +43,7 @@ The script written for the commit testing is activated through the pre-commit ho
 
 The script was written within the pre-commit hook itself so that it could be implemented during the git commit process. I called the debuggers within the script itself and created a loop to loop through the committed files.
 
-Requirements:
+#### Requirements:
 
 There are some requirements in order for this script to work.
 
