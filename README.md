@@ -4,7 +4,7 @@
 
 ## Author: Keerthi Krishnan 
 
-### ** User Instructions: **
+### User Instructions:
 
 #### Purpose:
 
