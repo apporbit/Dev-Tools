@@ -18,9 +18,9 @@ Ultimately, the goal of this implementation is to reduce reviewing time on githu
  
 This script will only work for the following files attempting to be committed:
 
-	*shellscript* - .sh
-	*python* - .py
-	*golang* - .go
+	shellscript - .sh
+	python - .py
+	golang - .go
 
 #### User Interaction:
 
@@ -50,6 +50,6 @@ There are some requirements in order for this script to work.
 
 The required debuggers should be downloaded. The debuggers needed for this script are shellcheck(shellscript debugger), pylint(python debugger), and goimports(go debugger). The links to download are attached below.
 
-		*shellcheck*: <https://www.shellcheck.net/>
-		*pylint*: <https://www.pylint.org/>
-		*goimports*: <https://godoc.org/golang.org/x/tools/cmd/goimports>
+		shellcheck: https://www.shellcheck.net/
+		pylint: https://www.pylint.org/
+		goimports: https://godoc.org/golang.org/x/tools/cmd/goimports
