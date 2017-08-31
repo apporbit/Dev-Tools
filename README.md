@@ -53,3 +53,11 @@ The required debuggers should be downloaded. The debuggers needed for this scrip
 		shellcheck: https://www.shellcheck.net/
 		pylint: https://www.pylint.org/
 		goimports: https://godoc.org/golang.org/x/tools/cmd/goimports
+
+To install the required debuggers, I have created a script that can download the required debuggers needed. 
+
+This script allows you to install any program or file that is needed. It is created as an executable file by running the file with the specific program needed to install. The program will then be installed on your machine, ready for use.
+
+The command needed to be run is:
+
+./install.sh <program-name> 
