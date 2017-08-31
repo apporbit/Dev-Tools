@@ -60,4 +60,4 @@ This script allows you to install any program or file that is needed. It is crea
 
 The command needed to be run is:
 
-./install.sh <program-name> 
+./install.sh (program-name) 
