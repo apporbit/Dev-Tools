@@ -60,4 +60,8 @@ This script allows you to install any program or file that is needed. It is crea
 
 The command needed to be run is:
 
-	./install.sh (program-name) 
+	./install.sh (program-name)
+
+This script was made using the yum command in order to install the program needed. It first updates the program you require to be downloaded, given that you have it, and then, if the program does not exist, it starts to install the program.
+
+ 
