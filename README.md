@@ -54,7 +54,7 @@ The required debuggers should be downloaded. The debuggers needed for this scrip
 
 		shellcheck: https://www.shellcheck.net/
 		pylint: https://www.pylint.org/
-		goimports: https://golang.org/doc/code.html (refer to GOPATH environment variable and Import 								 paths section)
+		goimports: https://golang.org/doc/code.html (refer to GOPATH environment variable and Import paths section)
 
 To install the required debuggers, I have created a script that can download the required debuggers needed. 
 
