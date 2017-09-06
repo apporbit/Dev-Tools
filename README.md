@@ -24,9 +24,9 @@ This script will only work for the following files attempting to be committed:
 
 #### User Interaction:
 
-When user commits the following files to git, the respective debugger will go through the script and print out the errors found with the appropriate line numbers and error message. If there are errors found, then the code will not commit until the developer corrects those errors and the debugger does not find them. 
+When user commits the following files to git, the respective debugger will go through the script and print out the errors found with the appropriate line numbers and error message. If there are errors found, then the code will not commit until the developer corrects those errors and the debugger does not find them. The developer can also override this process using the command "--no-verify".  
 
-The pre-commit script will also go through the developer script and if the debuggers involved in the pre-commit script are not downloaded on the user's machine, an error message will be printed, telling the user that the required debugger(s) is to be downloaded and will fail the commit. The user must download the required debugger(s) in order to continue the process of committing the code.  
+The pre-commit script will also go through the developer script and if the debuggers involved in the pre-commit script are not downloaded on the user's machine, an error message will be printed, telling the user that the required debugger(s) is to be downloaded and will fail the commit. The user must download the required debugger(s) in order to continue the process of committing the code. There is a script that has been created in order to automatically download the necessary debuggers called "install.sh". For more information, refer to Requirements Section of Documentation. 
 
 #### About the Debuggers:
 
@@ -44,6 +44,8 @@ The script written for the commit testing is activated through the pre-commit ho
 
 The script was written within the pre-commit hook itself so that it could be implemented during the git commit process. I called the debuggers within the script itself and created a loop to loop through the committed files.
 
+**This script has only been tested on a Linux based OS.** 
+
 #### Requirements:
 
 There are some requirements in order for this script to work.
@@ -52,7 +54,7 @@ The required debuggers should be downloaded. The debuggers needed for this scrip
 
 		shellcheck: https://www.shellcheck.net/
 		pylint: https://www.pylint.org/
-		goimports: https://godoc.org/golang.org/x/tools/cmd/goimports
+		goimports: https://golang.org/doc/code.html (refer to GOPATH environment variable and Import 								 paths section)
 
 To install the required debuggers, I have created a script that can download the required debuggers needed. 
 
@@ -64,4 +66,12 @@ The command needed to be run is:
 
 This script was made using the yum command in order to install the program needed. It first updates the program you require to be downloaded, given that you have it, and then, if the program does not exist, it starts to install the program.
 
- 
+#### Future Improvements:
+
+1. To be able to implement instant installation of necessary programs needed to run the script.
+	Integration of the installation script in the git commit process for automatic installation of neces	    sary debuggers
+
+2. To integrate more languages in the pre-commit script in order to check a broader range of files.
+
+3. To test the script in an OS other than Linux and make sure it runs and does not create errors.
+
