@@ -24,7 +24,7 @@ This script will only work for the following files attempting to be committed:
 
 #### User Interaction:
 
-When user commits the following files to git, the respective debugger will go through the script and print out the errors found with the appropriate line numbers and error message. If there are errors found, then the code will not commit until the developer corrects those errors and the debugger does not find them. The developer can also override this process using the command "--no-verify".  
+When user commits the following files to git, the respective debugger will go through the script and print out the errors found with the appropriate line numbers and error message. If there are errors found, then the code will not commit until the developer corrects those errors and the debugger does not find them. The developer can also override this process using the command **--no-verify**.  
 
 The pre-commit script will also go through the developer script and if the debuggers involved in the pre-commit script are not downloaded on the user's machine, an error message will be printed, telling the user that the required debugger(s) is to be downloaded and will fail the commit. The user must download the required debugger(s) in order to continue the process of committing the code. There is a script that has been created in order to automatically download the necessary debuggers called "install.sh". For more information, refer to Requirements Section of Documentation. 
 
