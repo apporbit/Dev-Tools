@@ -68,8 +68,7 @@ This script was made using the yum command in order to install the program neede
 
 #### Future Improvements:
 
-1. To be able to implement instant installation of necessary programs needed to run the script.
-	*Integration of the installation script in the git commit process for automatic installation of necessary debuggers
+1. To be able to implement instant installation of necessary programs needed to run the script. Integration of the installation script in the git commit process for automatic installation of necessary debuggers
 
 2. To integrate more languages in the pre-commit script in order to check a broader range of files.
 
